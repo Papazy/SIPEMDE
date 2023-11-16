@@ -98,7 +98,7 @@ model Post {
   subredditId String
   comments    Comment[] 
   votes       Vote[]
-  isAccepted  
+  isAccepted  Boolean   @default(false)
 }
 
 model Comment {
