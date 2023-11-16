@@ -45,6 +45,7 @@ model Session {
 
 model User {
   id                String         @id @default(cuid())
+  nik               String?        @unique
   name              String?
   email             String?        @unique
   emailVerified     DateTime?
@@ -97,6 +98,7 @@ model Post {
   subredditId String
   comments    Comment[] 
   votes       Vote[]
+  isAccepted  
 }
 
 model Comment {

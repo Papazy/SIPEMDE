@@ -21,13 +21,11 @@ export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
 
 const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
-  const cachedPost = (await redis.hgetall(
-    `post:${params.postId}`
-  )) as CachedPost
+  const cachedPost = ({}) as CachedPost
 
   let post: (Post & { votes: Vote[]; author: User }) | null = null
 
-  if (!cachedPost) {
+  // if (!cachedPost) {
     post = await db.post.findFirst({
       where: {
         id: params.postId,
@@ -37,7 +35,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
         author: true,
       },
     })
-  }
+  // }
 
   if (!post && !cachedPost) return notFound()
 

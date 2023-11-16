@@ -74,10 +74,10 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import('@editorjs/editorjs')).default
     const Header = (await import('@editorjs/header')).default
-    const Embed = (await import('@editorjs/embed')).default
-    const Table = (await import('@editorjs/table')).default
-    const List = (await import('@editorjs/list')).default
-    const Code = (await import('@editorjs/code')).default
+    // const Embed = (await import('@editorjs/embed')).default
+    // const Table = (await import('@editorjs/table')).default
+    // const List = (await import('@editorjs/list')).default
+    // const Code = (await import('@editorjs/code')).default
     const LinkTool = (await import('@editorjs/link')).default
     const InlineCode = (await import('@editorjs/inline-code')).default
     const ImageTool = (await import('@editorjs/image')).default
@@ -105,7 +105,7 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
               uploader: {
                 async uploadByFile(file: File) {
                   // upload to uploadthing
-                  const [res] = await uploadFiles([file], 'imageUploader')
+                  const [res] = await uploadFiles([file], 'imageUploader') 
 
                   return {
                     success: 1,
@@ -117,11 +117,11 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
               },
             },
           },
-          list: List,
-          code: Code,
+          // list: List,
+          // code: Code,
           inlineCode: InlineCode,
-          table: Table,
-          embed: Embed,
+          // table: Table,
+          // embed: Embed,
         },
       })
     }

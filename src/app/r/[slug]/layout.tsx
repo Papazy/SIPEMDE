@@ -10,8 +10,8 @@ import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Breadit',
-  description: 'A Reddit clone built with Next.js and TypeScript.',
+  title: 'SIPEMDE',
+  description: 'Layanan pengaduan masyarakat desa',
 }
 
 const Layout = async ({
@@ -82,25 +82,25 @@ const Layout = async ({
                   </time>
                 </dd>
               </div>
-              <div className='flex justify-between gap-x-4 py-3'>
+              {/* <div className='flex justify-between gap-x-4 py-3'>
                 <dt className='text-gray-500'>Members</dt>
                 <dd className='flex items-start gap-x-2'>
                   <div className='text-gray-900'>{memberCount}</div>
                 </dd>
-              </div>
-              {subreddit.creatorId === session?.user?.id ? (
+              </div> */}
+              {/* {subreddit.creatorId === session?.user?.id ? (
                 <div className='flex justify-between gap-x-4 py-3'>
                   <dt className='text-gray-500'>You created this community</dt>
                 </div>
-              ) : null}
+              ) : null} */}
 
-              {subreddit.creatorId !== session?.user?.id ? (
+              {/* {subreddit.creatorId !== session?.user?.id ? (
                 <SubscribeLeaveToggle
                   isSubscribed={isSubscribed}
                   subredditId={subreddit.id}
                   subredditName={subreddit.name}
                 />
-              ) : null}
+              ) : null} */}
               <Link
                 className={buttonVariants({
                   variant: 'outline',

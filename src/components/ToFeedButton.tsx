@@ -15,16 +15,16 @@ const ToFeedButton = () => {
   return (
     <a href={subredditPath} className={buttonVariants({ variant: 'ghost' })}>
       <ChevronLeft className='h-4 w-4 mr-1' />
-      {subredditPath === '/' ? 'Back home' : 'Back to community'}
+      {subredditPath === '/' ? 'Back home' : 'Back to Feed'}
     </a>
   )
 }
 
 const getSubredditPath = (pathname: string) => {
   const splitPath = pathname.split('/')
-
+  
   if (splitPath.length === 3) return '/'
-  else if (splitPath.length > 3) return `/${splitPath[1]}/${splitPath[2]}`
+  else if (splitPath.length > 3) return `/`
   // default path, in case pathname does not match expected format
   else return '/'
 }
