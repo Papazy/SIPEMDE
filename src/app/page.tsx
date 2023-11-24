@@ -10,6 +10,7 @@ export const fetchCache = 'force-no-store'
 
 export default async function Home() {
   const session = await getAuthSession()
+  // console.log("Home : ");
 
   return (
     <>
@@ -33,6 +34,7 @@ export default async function Home() {
               </p>
             </div>
 
+            {/* Tambahin Konfirmasih Untuk Dia Login terlebih dahulu ketika ingin Mengunggah Postingan */}
             <Link
               className={buttonVariants({
                 className: 'w-full mt-4 mb-6',

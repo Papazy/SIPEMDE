@@ -13,13 +13,15 @@ export const metadata = {
   description: 'Layanan pengaduan masyarakat desa berbasis website.',
 }
 
-export default function RootLayout({
+function RootLayout({
   children,
   authModal,
 }: {
   children: React.ReactNode
   authModal: React.ReactNode
 }) {
+  console.log('authModal:', authModal);
+
   return (
     <html
       lang='en'
@@ -42,3 +44,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+export default RootLayout
