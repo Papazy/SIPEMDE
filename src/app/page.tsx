@@ -1,9 +1,17 @@
 import CustomFeed from '@/components/homepage/CustomFeed'
 import GeneralFeed from '@/components/homepage/GeneralFeed'
+// import { faTimes } from "@fortawesome/free-brands-svg-icons";
 import { buttonVariants } from '@/components/ui/Button'
 import { getAuthSession } from '@/lib/auth'
 import { Home as HomeIcon } from 'lucide-react'
 import Link from 'next/link'
+// Import necessary libraries from FontAwesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+// Add the imported icons to the library
+library.add(faTimes);
 
 export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
@@ -32,7 +40,16 @@ export default async function Home() {
                 Selamat datang di SIPEMDE <br></br> (Sistem Informasi Pengaduan Masyarakat Desa).<br></br>Ajukan pengaduan anda disini
               </p>
             </div>
-
+            {/* Buat sebuah alert disini */}
+            {/* <div className='bg-red-500 text-white p-3 mb-4 flex items-center'>
+          Maaf, postingan kamu sudah dihapus oleh admin.
+          <button
+            // onClick={}
+            className='ml-2 text-sm focus:outline-none'>
+            <FontAwesomeIcon icon={faTimes} className="fas fa-check"
+        style={{ color: "red", fontSize: 64 }}/>
+          </button>
+        </div> */}
             <Link
               className={buttonVariants({
                 className: 'w-full mt-4 mb-6',
