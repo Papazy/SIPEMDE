@@ -1,71 +1,82 @@
-import { db } from '@/lib/db'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { nanoid } from 'nanoid'
-import { NextAuthOptions, getServerSession } from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
+import { NextAuthOptions } from "next-auth";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import  prismaa  from "./prisma";
+// import { CredentialsProvider } from "next-auth/providers";
+import Credentials from "next-auth/providers/credentials";
+import { PrismaClient } from "@prisma/client";
+import { db } from "@/lib/db";
+// import { nanoid } from "nanoid";
+import { getServerSession } from "next-auth";
+
+const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
-    strategy: 'jwt',
-  },
-  pages: {
-    signIn: '/sign-in',
+    strategy: "jwt",
   },
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    Credentials({
+      name: "credentials",
+
+      credentials: {
+        nik: { label: "NIK", type: "text" },
+      },
+
+      async authorize(credentials, req) {
+        const user = await prisma.user.findUnique({
+          where: {
+            nik: credentials?.nik,
+          },
+        });
+        if (user && credentials?.nik === user?.nik) {
+          // console.log(user);
+          return user;
+        } else {
+          return Promise.resolve(null);
+        }
+      },
     }),
   ],
+
+  pages: {
+    signIn: "/sign-in",
+  },
+
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        session.user.id = token.id
-        session.user.name = token.name
-        session.user.email = token.email
-        session.user.image = token.picture
-        session.user.username = token.username
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+        session.user.username = token.username;
       }
 
-      return session
+      return session;
     },
 
     async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
-          email: token.email,
+          name: token.name,
         },
-      })
+      });
 
       if (!dbUser) {
-        token.id = user!.id
-        return token
-      }
-
-      if (!dbUser.username) {
-        await db.user.update({
-          where: {
-            id: dbUser.id,
-          },
-          data: {
-            username: nanoid(10),
-          },
-        })
+        token.id = user!.id;
+        return token;
       }
 
       return {
         id: dbUser.id,
         name: dbUser.name,
-        email: dbUser.email,
-        picture: dbUser.image,
-        username: dbUser.username,
-      }
+      };
     },
     redirect() {
-      return '/'
+      return "/";
     },
   },
-}
+};
 
-export const getAuthSession = () => getServerSession(authOptions)
+export const getAuthSession = () => getServerSession(authOptions);

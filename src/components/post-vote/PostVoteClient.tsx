@@ -98,6 +98,7 @@ const PostVoteClient = ({
       </p>
 
       {/* downvote */}
+      {votesAmt >0&&(
       <Button
         onClick={() => vote('DOWN')}
         size='sm'
@@ -112,6 +113,8 @@ const PostVoteClient = ({
           })}
         />
       </Button>
+
+      )}
     </div>
   )
 }

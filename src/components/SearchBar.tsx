@@ -80,7 +80,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
         <CommandList className='absolute bg-white top-full inset-x-0 shadow rounded-b-md'>
           {isFetched && <CommandEmpty>No results found.</CommandEmpty>}
           {(queryResults?.length ?? 0) > 0 ? (
-            <CommandGroup heading='Communities'>
+            <CommandGroup heading='Posts'>
               {queryResults?.map((subreddit) => (
                 <CommandItem
                   onSelect={(e) => {
@@ -90,7 +90,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
                   key={subreddit.id}
                   value={subreddit.title}>
                   <Users className='mr-2 h-4 w-4' />
-                  <a href={`/r/${subreddit.title}`}>r/{subreddit.title}</a>
+                  <a href={`/r/Aduan/post/${subreddit.id}`}>{subreddit.title}</a>
                 </CommandItem>
               ))}
             </CommandGroup>
